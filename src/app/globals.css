@@ -994,3 +994,10 @@ main.container {
     padding: 6px 10px;
   }
 }
+
+/* 상세 상단: 휴대폰 폭에서는 한 줄로 (위의 두 칸 지정이 뒤에 나와 덮어쓰던 문제) */
+@media (max-width: 720px) {
+  .detail-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
