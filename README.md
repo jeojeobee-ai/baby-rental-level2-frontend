@@ -5,7 +5,8 @@
 
 - 기획서: [기획서.md](./기획서.md)
 - 백엔드 저장소: https://github.com/jeojeobee-ai/baby-rental-level2-backend
-- 배포 주소: 아직 없음 (배포 뒤 이 줄에 적습니다)
+- 백엔드 배포 주소: https://baby-rental-level2-api.onrender.com
+- 배포 주소: https://baby-rental-level2-frontend.vercel.app
 
 > **첫 접속 안내** — 백엔드가 Render 무료 서버라서 한동안 쓰지 않으면 잠듭니다. 첫 접속 때 데이터가 나오기까지 **1분쯤 걸릴 수 있어요.** 연결 안내가 보이면 잠시 뒤 "다시 시도"를 눌러 주세요.
 
