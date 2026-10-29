@@ -43,6 +43,11 @@ export default function NewRentalForm() {
         <span className="muted">{ageRange(item.minAgeMonths, item.maxAgeMonths)}</span>
         <StatusBadge status={item.status} />
       </div>
+      {item.hasPendingRequest && (
+        <p className="notice">
+          이 용품에는 신청 중인 건이 있어서 직접 대여 기록을 추가할 수 없어요. <Link href="/requests">신청 목록</Link>에서 대여 처리하거나 신청을 취소해 주세요.
+        </p>
+      )}
       {item.status !== 'AVAILABLE' && (
         <p className="notice">이 용품은 지금 &lsquo;대여 가능&rsquo; 상태가 아니에요. 빌려주기 전에 상태를 꼭 확인해 주세요.</p>
       )}

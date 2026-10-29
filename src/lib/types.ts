@@ -24,6 +24,7 @@ export interface Item {
   imageUrl: string | null;
   status: ItemStatus;
   lastSanitizedAt: string | null;
+  hasPendingRequest: boolean;
 }
 
 export interface Rental {
@@ -45,7 +46,32 @@ export interface Sanitization {
   memo: string | null;
 }
 
+export type RequestStatus = 'PENDING' | 'APPROVED' | 'CANCELLED';
+
+export interface RentalRequest {
+  id: number;
+  itemId: number;
+  item?: { id: number; code: string; name: string };
+  guardianName: string;
+  guardianPhone: string;
+  childAgeMonths: number;
+  durationDays: number;
+  status: RequestStatus;
+  approvedAt: string | null;
+  cancelledAt: string | null;
+  rentalId: number | null;
+  createdAt: string;
+  elapsedDays: number;
+}
+
+export interface Stats {
+  totalItems: number;
+  rented: number;
+  available: number;
+}
+
 export interface ItemDetail extends Item {
+  requests: RentalRequest[];
   rentals: Rental[];
   sanitizations: Sanitization[];
 }

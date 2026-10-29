@@ -8,6 +8,9 @@ import {
   CATEGORY_LABELS,
   CONDITION_LABELS,
   METHOD_LABELS,
+  REQUEST_STATUS_LABELS,
+  elapsedText,
+  kstDate,
   RESULT_LABELS,
   ageRange,
   productLine,
@@ -37,6 +40,8 @@ export default function ItemDetailView() {
   const { item } = state;
   // 대여 중이면 반납 예정일과 남은 날(또는 지난 날)을 함께 보여 줍니다.
   const activeRental = item.rentals.find((rental) => !rental.returnedAt);
+  const pending = item.requests.find((request) => request.status === 'PENDING');
+  const canRequest = item.status === 'AVAILABLE' && !pending;
   const daysLeft = activeRental
     ? Math.round((Date.parse(activeRental.dueDate) - Date.parse(today())) / 86_400_000)
     : null;
@@ -67,6 +72,20 @@ export default function ItemDetailView() {
           <p className="demo-note">사진은 데모용 그림이며, 브랜드·모델명은 가상 데이터예요.</p>
         </div>
       </div>
+
+      {pending && (
+        <div className="banner" role="status">
+          <strong>{pending.guardianName}</strong> 보호자의 대여 신청이 있어요 ({elapsedText(pending.elapsedDays)}).{' '}
+          <Link href="/requests">신청 목록에서 대여 처리 또는 취소하기</Link>
+        </div>
+      )}
+      {canRequest && (
+        <p>
+          <Link className="button" href={`/items/${item.id}/requests/new`}>
+            대여 신청
+          </Link>
+        </p>
+      )}
 
       <dl className="info-grid">
         <div>
@@ -104,6 +123,43 @@ export default function ItemDetailView() {
           </div>
         )}
       </dl>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>대여 신청 기록 ({item.requests.length})</h2>
+        </div>
+        {item.requests.length === 0 ? (
+          <p className="state-box">아직 대여 신청이 없어요.</p>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>보호자</th>
+                <th>연락처</th>
+                <th>아기 월령</th>
+                <th>희망 기간</th>
+                <th>신청 상태</th>
+                <th>신청한 날</th>
+              </tr>
+            </thead>
+            <tbody>
+              {item.requests.map((request) => (
+                <tr key={request.id}>
+                  <td data-label="보호자" className="strong">{request.guardianName}</td>
+                  <td data-label="연락처" className="mono">{request.guardianPhone}</td>
+                  <td data-label="아기 월령">{request.childAgeMonths}개월</td>
+                  <td data-label="희망 기간">{request.durationDays}일</td>
+                  <td data-label="신청 상태">
+                    <span className={`request-status request-status-${request.status}`}>{REQUEST_STATUS_LABELS[request.status]}</span>
+                    {request.status === 'PENDING' && <span className="sub-text">{elapsedText(request.elapsedDays)}</span>}
+                  </td>
+                  <td data-label="신청한 날">{kstDate(request.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </section>
 
       <section className="section">
         <div className="section-head">

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { MainNav } from '@/components/main-nav';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,9 +21,12 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body>
         <header className="site-header">
           <div className="container header-inner">
-            <Link href="/items" className="brand">
+            <Link href="/" className="brand">
               햇빛구 육아용품 대여실
             </Link>
+            <Suspense fallback={<nav className="main-nav" />}>
+              <MainNav />
+            </Suspense>
             <span className="header-note">직원용 관리 도구 · 가상 데이터</span>
           </div>
         </header>

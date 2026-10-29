@@ -744,3 +744,253 @@ main.container {
 .due-date-over {
   color: var(--danger);
 }
+
+/* ---------- Level 2: 메뉴, 현황, 필터, 신청 ---------- */
+.main-nav {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main-nav a:hover {
+  background: var(--neutral-soft);
+}
+
+.main-nav a.nav-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  display: block;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.stat-card:hover {
+  border-color: var(--accent);
+}
+
+.stat-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.stat-number {
+  display: block;
+  margin-top: 4px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-card-available .stat-number {
+  color: var(--success);
+}
+
+.stat-card-rented .stat-number {
+  color: var(--accent);
+}
+
+.reset-box {
+  margin-top: 40px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.reset-box p {
+  margin: 0 0 12px;
+}
+
+.button-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.button-danger:hover {
+  background: #8f1c12;
+  border-color: #8f1c12;
+}
+
+.reset-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+}
+
+.reset-form input {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.result-message {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.filter-bar .field {
+  margin-bottom: 0;
+  flex: 0 1 160px;
+}
+
+.filter-bar .field-search {
+  flex: 1 1 240px;
+}
+
+.filter-bar input,
+.filter-bar select {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  width: 100%;
+}
+
+.badge-pending {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.banner {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.banner a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tabs button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tabs button[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.request-status {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.request-status-PENDING {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.request-status-APPROVED {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.request-status-CANCELLED {
+  background: var(--neutral-soft);
+  color: var(--muted);
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .header-inner {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .main-nav {
+    order: 3;
+    flex: 1 0 100%;
+  }
+
+  .main-nav a {
+    padding: 6px 10px;
+  }
+}

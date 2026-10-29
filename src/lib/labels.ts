@@ -1,4 +1,4 @@
-import type { Category, Condition, ItemStatus, Method, Result } from './types';
+import type { Category, Condition, ItemStatus, Method, RequestStatus, Result } from './types';
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   MOBILITY: '이동',
@@ -35,6 +35,18 @@ export const STATUS_LABELS: Record<ItemStatus, string> = {
   NEEDS_REPAIR: '수리 필요',
 };
 
+// 신청 상태
+export const REQUEST_STATUS_LABELS: Record<RequestStatus, string> = {
+  PENDING: '신청 중',
+  APPROVED: '대여 처리됨',
+  CANCELLED: '취소됨',
+};
+
+// 신청한 지 며칠째인지 (표시만 하며 경고색이나 자동 만료는 없음)
+export function elapsedText(days: number) {
+  return days <= 0 ? '오늘 신청' : `신청한 지 ${days}일`;
+}
+
 // 대표 사진: public/items/ 의 데모 그림 (직접 제작, 실제 제품 사진 아님).
 // 백엔드 src/items/item-images.ts 의 ITEM_IMAGES 와 같은 목록이어야 합니다.
 export const DEFAULT_IMAGE = '/items/default.svg';
@@ -68,4 +80,9 @@ export function ageRange(min: number, max: number) {
 // 브라우저 기준 오늘 날짜 (YYYY-MM-DD)
 export function today() {
   return new Date().toLocaleDateString('en-CA');
+}
+
+// 서버가 UTC로 보낸 시각을 한국 날짜(YYYY-MM-DD)로
+export function kstDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
 }
